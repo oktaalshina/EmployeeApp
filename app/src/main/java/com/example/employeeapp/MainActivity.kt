@@ -21,15 +21,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        with(binding) {
-            //
+        // HANYA TAMBAHKAN INI (listener untuk tombol FAB)
+        binding.fabAdd.setOnClickListener {
+            val intent = Intent(this@MainActivity, CreateEmployeeActivity::class.java)
+            startActivity(intent)
         }
 
+        // Kode Anda di bawah ini tidak berubah
+        // with(binding) { }
+        // loadEmployee() // Pindahkan ke onResume
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Kita panggil loadEmployee di sini agar list otomatis refresh
+        // setelah kita create, update, atau delete data
         loadEmployee()
     }
 
@@ -84,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                 p0: Call<EmployeeResponse?>,
                 p1: Throwable
             ) {
-                TODO("Not yet implemented")
+                Toast.makeText(this@MainActivity, "Error: ${p1.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

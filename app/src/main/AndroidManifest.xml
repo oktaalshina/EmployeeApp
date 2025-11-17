@@ -25,6 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CreateEmployeeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateEmployeeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
